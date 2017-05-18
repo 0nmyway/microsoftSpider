@@ -37,6 +37,7 @@ python MicrosoftSpider.py
 如：
 ![](3.png)
 每一年的ms信息都对应一个url,将此url替换代码中的url即可。
+![](4.png)
 
 ### oprethinkdb.py
 我已注释数据库相关代码，如需对爬取的数据进行存储，可自行添加代码。
