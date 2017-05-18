@@ -12,7 +12,7 @@
 数据格式为json，每行以\n结尾。
 #### python中转化
 ```bash
-with open("ms_kb.txt","r") as w:
+with open("ms_kb.db","r") as w:
     f=[i.strip("\n") for i in w.readlines()]
 for i in f:
     print type(json.loads(i))
@@ -22,7 +22,7 @@ for i in f:
 * id
 * Content 
 
-Content为一个列表，格式如：[(补丁url,操作系统版本，K对应的B号),]
+Content为一个列表，格式如：[(补丁url，操作系统版本，对应的KB号),]
 
 ### MicrosoftSpider.py
 如果想要获取更多信息，可以修改爬虫代码，自行爬取。
@@ -36,7 +36,7 @@ python MicrosoftSpider.py
 注意：在运行前请先修改代码填写要爬取年份ms漏洞的url。
 如：
 ![](3.png)
-每一年的ms信息都对应一个url。
+每一年的ms信息都对应一个url,将此url替换代码中的url即可。
 
 ### oprethinkdb.py
 我已注释数据库相关代码，如需对爬取的数据进行存储，可自行添加代码。
