@@ -9,12 +9,14 @@ __Python__="2.7.11"
 '''
 
 import requests 
-# from oprethinkdb import oprethinkdb
+# from oprethinkdb import oprethinkdb ＃数据库模块
 import re
 
-url="https://technet.microsoft.com/en-us/library/security/dn632603.aspx"
+url="https://technet.microsoft.com/en-us/library/security/dn632603.aspx" 
 res='title=\"MS[\d-]+\">(.*)</a>' #re
 msurl="https://technet.microsoft.com/en-us/library/security/"
+res2=r"<a href=\"([^>]*)\">([^<]*)<\/a>[\s\<\>spanclu \=\"\[\]\d\/]+?[^<]+?<br />(\([^\<\(\)]*\))" #re
+p2=re.compile(res2,re.DOTALL)
 
 red = '\033[1;31m'
 green = '\033[1;32m'
@@ -51,12 +53,14 @@ def getkb(url,ms):
 	except:
 		print "%s[INFO]Request url error %s" % (red,reset)
 	else:
-		res=r"<a href=\"([^>]*)\">([^<]*)<\/a>[\s\<\>spanclu \=\"\[\]\d\/]+?[^<]+?<br />(\([^\<\(\)]*\))" 
-		p=re.compile(res,re.DOTALL)
-		result_list=p.findall(body)
+		result_list=p2.findall(body)
 		print "%s[INFO]result_lens is %s %s" % (green,len(result_list),reset)
 		dicts["Content"]=result_list
 		print "[INFO]result is ",dicts
+
+		'''
+		将结果数据存入数据库
+		'''
 		# try:
 		# 	cur_db.Insert(dicts,"MS_ID")
 		# 	print "%s[INFO]Insert DB Success %s" % (green,reset)
@@ -65,15 +69,18 @@ def getkb(url,ms):
 
 
 
-# cur_db=oprethinkdb("","")
 
-result_list=getcontent(url)
+if __name__=="__main__":
 
-for ms in result_list:
-	msurl_new=msurl+ms.lower()+".aspx"
-	print "%s[INFO]target_url is %s %s" % (white,msurl_new,reset)
-	getkb(msurl_new,ms)
-	break
+	# cur_db=oprethinkdb("","")
+
+	result_list=getcontent(url)
+
+	for ms in result_list:
+		msurl_new=msurl+ms.lower()+".aspx"
+		print "%s[INFO]target_url is %s %s" % (white,msurl_new,reset)
+		getkb(msurl_new,ms)
+		# break
 
 
 
