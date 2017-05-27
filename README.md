@@ -1,3 +1,6 @@
+http://download.microsoft.com/download/6/7/3/673E4349-1CA5-40B9-8879-095C72D5B49D/BulletinSearch.xlsx  微软官网可以提供下载excel，内容也很全，因此这个项目已经没必要存在了，权当爬虫练习。
+另外：https://github.com/GDSSecurity/Windows-Exploit-Suggester 这个项目已经实现windows主机的KB号扫描。
+
 # microsoftSpider
 爬取微软漏洞信息，MS对应的每个版本操作系统KB号以及补丁下载地址。
 
